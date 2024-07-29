@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les petits plats</title>
+    <!-- Bootstrap CSS et Bootstrap icons CDNs -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Import Anton typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <!-- Import Manrope typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Main css file -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="overflow-x-hidden">
+    <header class="header p-5">
+        <div class="logo">
+            <h2 class="fs-4 text-light fw-normal anton-h2">LES PETITS PLATS
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-record2" viewBox="0 0 16 16">
+                    <path d="M8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8m0 1A5 5 0 1 0 8 3a5 5 0 0 0 0 10"/>
+                    <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                </svg>
+            </h2>
+        </div>
+    </header>
+        
+    <main class="main">
+        <div id="title" class="search-container container-fluid d-flex flex-column align-items-center justify-content-center">
+            <h1 class="search-title w-100 d-flex anton-h1 justify-content-center fw-bold fs-1">CHERCHEZ PARMI PLUS DE 1500 RECETTES <br>DU QUOTIDIEN,SIMPLES ET D&#201;LICIEUSES</h1>
+        </div>
+        <div class="recettes container d-flex space-between">
+            <div class="recettes-form container d-flex"></div>
+            <div class="recettes-number-container d-flex align-items-center justify-content-end">
+                <h3 class="anton-h3 fs-5"><span class="recettes-number">1500</span> recettes</h3>
+            </div>
+        </div>
+        <div class="recettes-cards d-flex"></div>    
+    </main>
+    <script src="./scripts/index.js" type="module"></script>
+</body>
+</html>

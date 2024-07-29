@@ -1,0 +1,392 @@
+/* Text classes who use Anton font family */
+.anton-h1 {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 44px;
+    letter-spacing: 2px;
+    line-height: 66px;
+    text-align: center;
+  }
+
+.anton-h2 {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 28px;
+    letter-spacing: 1px;
+}
+
+.anton-h3 {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 28px;
+    letter-spacing: 0px;
+    color: black;  
+}
+
+.anton-h4 {
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+    letter-spacing: 0px;
+    color: black;  
+}
+
+/* Use a unique and descriptive class name */
+/* Use a value from 200 to 800 */
+/* Text classes who use Manrope font family */
+.manrope-h3 {
+  font-family: "Manrope", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 800;
+}
+.manrope-h5 {
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    color: #7A7A7A;
+  }
+
+.manrope-option {
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    color:#1B1B1B;
+}
+
+.manrope-p {
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color:#1B1B1B;
+}
+
+/* SVG */
+.bi.bi-record2{
+    margin-left:-7px;
+}
+.bi.bi-search{
+    font-size: 30px;
+}
+body{
+    background-color: #EDEDED;
+}
+
+header{
+    position:relative;
+    z-index: 1;
+}
+
+.logo{
+    position:absolute;
+    top:51px;
+    left:88px;
+}
+
+.main{
+    padding:0;
+    margin:0;
+}
+
+.search-container{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background: url('../assets/header.jpg') rgba(0,0,0,0.3);
+    background-blend-mode:multiply;
+    background-position: 25% 72%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.search-title{
+    color:#FFD15B !important;
+    font-size: 44px !important;
+    padding-top: 76px;
+    max-width: 890px;
+}
+
+.search-input{
+    width: 100%;
+    padding-left: 30px;
+    margin-left: 80px !important;
+    min-width: 300px;
+    max-width: 954px;
+    height: 72px;
+    margin: 20px;
+    z-index: 2;
+}
+
+/* Search input placeholder */
+::placeholder {
+    color: #7A7A7A;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
+    opacity: 1; /* Firefox */
+  }
+  
+  ::-ms-input-placeholder { /* Edge 12 -18 */
+    color: #7A7A7A;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-size: 1rem;
+    font-style: normal;
+  }
+
+.delete-text-button{
+    width:54px;
+    height:54px;
+    position:relative;
+    top: 30px;
+    right:146px;
+    border: none;
+    color: #7A7A7A;
+    visibility: hidden;
+    z-index: 1;
+    background-color: white;
+}
+
+.search-button{
+    width:54px;
+    height:54px;
+    position:relative;
+    top: 30px;
+    right:142px;
+    z-index: 3;
+}
+
+.search-button:hover{
+    background-color: #FFD15B;
+    color: black;
+    border: none;
+}
+
+.recettes{
+    max-width:1440px;
+    position: absolute;
+    top:100vh;
+    left:0;
+    right:0;
+    padding: 34px 70px 0 70px;
+    z-index: 1;
+}
+
+.recettes-form{
+    transition: all 1s ease;
+}
+
+
+.searching-options {
+    width:200px;
+    height:auto;
+    margin-right: 56px;
+    overflow: hidden;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 1s ease;
+}
+
+.option-header-container{
+    height:56px;
+    background-color: white;
+    overflow:hidden;
+}
+
+.option-name::after{
+    content:"\02C5";
+    font-size: 18px;
+    margin-top: -2px;
+}
+.searching-options:has(.option-name:hover) .option-name::after{
+    content:"\02C4";
+}
+
+.options-search-bar{
+    position:relative;
+}
+.options-search-bar .delete-option-input-text-button,
+.options-search-bar .search-options-button{
+    position: absolute;
+    width:30px;
+    height:30px;
+}
+
+.searching-options .search-bar-options-input{
+    border:1px solid #d1d1d1;
+    width: 100%;
+    height: 36px;
+    border-radius: 3px !important;
+}
+
+.options-search-bar .search-options-button{
+    top:2px;
+    right:10px;
+    color:#7A7A7A;
+    border:none;
+}
+
+.options-search-bar .delete-option-input-text-button{
+    top:3px;
+    right:30px;
+    color:#7A7A7A;
+    font-size: 18px;
+    border:none;
+    background-color: white;
+}
+
+.options-delete-text-icon{
+    width:100%;
+    height:100%;
+    visibility: hidden;
+}
+
+.options-search-bar .search-options-button:hover,
+.options-search-bar .delete-option-input-text-button:hover{
+    background-color: rgba(255, 255, 255,0);
+}
+
+.form-options{
+    width:100%;
+    margin-top: 14px;
+    list-style: none;
+    font-size: 14px;
+    padding-left: 0;
+    height:auto;
+    max-height:202px;
+    overflow-y: scroll;
+}
+
+.form-options::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.options-item{
+    width:100%;
+}
+
+.options-item:hover{
+    background-color: #FFD15B;
+}
+
+.filters{
+    width:100%;
+    padding-left: 0;
+}
+
+.option-filter{
+    width:100%;
+    height: 53px;
+    background-color: #FFD15B;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.filter-delete-button{
+    background-color: transparent;
+    border:none;
+    
+}
+
+.filter-delete-button .bi-x-lg{
+    font-weight: bolder;
+}
+
+.recettes-number-container{
+    width:200px;
+    height:64px;
+    padding-right: 10px;
+}
+
+.recettes-cards{
+    position: absolute;
+    width: 100%;
+    top:116vh;
+    transition: all 1s ease;
+}
+
+#recettes-cards-container{
+    width:100%;
+    padding-top: 30px;
+    max-width: 1440px;
+    margin:0 auto;
+    transition: all 3s ease;
+}
+
+.card{
+    width:380px;
+    height:731px;
+    border-radius: 21px;
+    border:none;
+    margin: 14px 18px 34px 18px;
+    opacity:0;
+    transform: scale(0.9);
+    animation: fadeIn 1s forwards;
+    animation-delay: calc(var(--item-index) * 0.5s);
+}
+
+.card-time{
+    position:absolute;
+    border-radius: 14px;
+    width: 72px;
+    height: 32px;
+    top: 21px;
+    right: 21px;
+    background-color: #FFD15B;
+}
+
+.card-img-container{
+    width: 100%;
+    height: 35%;
+    overflow: hidden;
+}
+
+.card-img-top{
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    object-fit: cover;
+    border-radius: 21px 21px 0 0;
+}
+
+.card-text{
+    height: 80px;
+    overflow:hidden;
+}
+
+.card-list-items{
+    list-style: none;
+    padding: 0;
+}
+
+.list-item-quantity{
+    color:#7A7A7A;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
