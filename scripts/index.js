@@ -86,12 +86,12 @@ function displayOptions(arr){
     createOption(new Set(filterAppareils(arr)), 'appareils');
 }
 
-function init(arr){
+function display(arr){
     displayOptions(arr);
     displayGalery(arr);
 }
 
-init(recipes);
+display(recipes);
 
 function filterRecipesByIngredients(arr){
     const ingredientsListFiltered = arr.filter(recipe => {
@@ -156,13 +156,13 @@ function filterText(arr,text){
 function inputTextTraitement(searchInput){
     if(searchInput.value.length <= 2){
         state.list = [...recipes]
-        init(filterRecipes(state.list));
+        display(filterRecipes(state.list));
     }
     
     else if(searchInput.value.length > 2 && searchInput.className.includes("search-input")){
         const arrSearchInputFiltered = filterText(recipes,searchInput.value);
         state.list = [...arrSearchInputFiltered];
-        init(filterRecipes(arrSearchInputFiltered));
+        display(filterRecipes(arrSearchInputFiltered));
     }
     return state.list;
 }
@@ -194,7 +194,7 @@ function deleteTextInput(input){
     input.value= "";
     input.setAttribute('placeholder','Rechercher une recette, un ingrédient, ...');
     deleteTextButtonAppearance(deleteTextButton,input)
-    init(filterRecipes(recipes));
+    display(filterRecipes(recipes));
 }
 
 function recetteCardPosition(){
@@ -212,7 +212,7 @@ function createFilter(element){
         const filter = new FilterOption(searchingOptionsId,item);
         filter.createFilterItem();
         recetteCardPosition();
-        init(filterRecipes(state.list));
+        display(filterRecipes(state.list));
     }
 }
 
@@ -222,7 +222,7 @@ function deleteFilter(element){
     state.filters[elementId].splice(elementIndex,1);
     element.remove();
     recetteCardPosition();
-    init(filterRecipes(state.list));
+    display(filterRecipes(state.list));
 }
 
 function filterOptionArray(arr,inputText){
