@@ -40,13 +40,11 @@
 /* Text classes who use Manrope font family */
 .manrope-h3 {
   font-family: "Manrope", sans-serif;
-  font-optical-sizing: auto;
   font-style: normal;
   font-weight: 800;
 }
 .manrope-h5 {
     font-family: "Manrope", sans-serif;
-    font-optical-sizing: auto;
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
@@ -55,7 +53,6 @@
 
 .manrope-option {
     font-family: "Manrope", sans-serif;
-    font-optical-sizing: auto;
     font-style: normal;
     font-weight: 500;
     font-size: 1rem;
@@ -64,7 +61,6 @@
 
 .manrope-p {
     font-family: "Manrope", sans-serif;
-    font-optical-sizing: auto;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -78,10 +74,12 @@
 .bi.bi-search{
     font-size: 30px;
 }
+
 body{
     background-color: #EDEDED;
 }
 
+/* Header */
 header{
     position:relative;
     z-index: 1;
@@ -93,11 +91,13 @@ header{
     left:88px;
 }
 
+
 .main{
     padding:0;
     margin:0;
 }
 
+/* Main Search Landing Page */
 .search-container{
     position:absolute;
     top:0;
@@ -133,7 +133,6 @@ header{
 ::placeholder {
     color: #7A7A7A;
     font-family: "Manrope", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
     font-size: 1rem;
@@ -143,7 +142,6 @@ header{
   ::-ms-input-placeholder { /* Edge 12 -18 */
     color: #7A7A7A;
     font-family: "Manrope", sans-serif;
-    font-optical-sizing: auto;
     font-weight: 400;
     font-size: 1rem;
     font-style: normal;
@@ -177,6 +175,7 @@ header{
     border: none;
 }
 
+/* Filters Container */
 .recettes{
     max-width:1440px;
     position: absolute;
@@ -187,11 +186,12 @@ header{
     z-index: 1;
 }
 
+/*Options search input container*/
 .recettes-form{
     transition: all 1s ease;
 }
 
-
+/*Options container*/
 .searching-options {
     width:200px;
     height:auto;
@@ -285,6 +285,7 @@ header{
     background-color: #FFD15B;
 }
 
+/*Filters*/
 .filters{
     width:100%;
     padding-left: 0;
@@ -314,6 +315,7 @@ header{
     padding-right: 10px;
 }
 
+/*Galery container*/
 .recettes-cards{
     position: absolute;
     width: 100%;

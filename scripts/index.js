@@ -1,3 +1,4 @@
+//Imports for needed files
 import {recipes} from '../data/recipes.js';
 import { SearchForm } from './views/searchForm.js';
 import { Options } from './views/filterSelectElement.js';
@@ -5,6 +6,7 @@ import { FilterOption } from './views/filterOptionElement.js';
 import { IngredientList } from './views/ingredientList.js';
 import { Galery } from './views/galeryElement.js';
 
+//Variables
 const searchContainer = document.querySelector('#title');
 const searchFormTitle = new SearchForm('title');
 searchContainer.appendChild(searchFormTitle.createSearchForm());
@@ -23,23 +25,11 @@ const state = {
 const {filters} = state;
 const {ingredients,appareils,ustensils} = filters;
 
-function displayGalery(arr){
-   if(!arr.length){ 
-        recettesCardsDiv.textContent = `Aucune recette ne contient ${searchInput.value} vous pouvez chercher «
-        tarte aux pommes », « poisson », etc.`;
-
-        const recettesNumber = document.querySelector('.recettes-number');
-        recettesNumber.textContent = arr.length;
-
-    }else {
-        recettesCardsDiv.innerHTML = '';
-
-        const recettesNumber = document.querySelector('.recettes-number');
-        recettesNumber.textContent = arr.length;
-
-        const galery = new Galery(arr);
-        recettesCardsDiv.appendChild(galery.createGalery());
-    }
+//Functions used to create the options
+function stringToUpperCase(string){
+    const ingredientLowerCase = string.toLowerCase()
+    const ingredientFirstLetterToUppercase = ingredientLowerCase[0].toUpperCase() + ingredientLowerCase.slice(1);
+    return ingredientFirstLetterToUppercase;
 }
 
 function filterIngredients(arr){
@@ -86,13 +76,83 @@ function displayOptions(arr){
     createOption(new Set(filterAppareils(arr)), 'appareils');
 }
 
+//Functions to display components of the page
+function displayGalery(arr){
+    if(!arr.length){
+        //The textContent property sanitize against HTML injections
+         recettesCardsDiv.textContent = `Aucune recette ne contient ${searchInput.value} vous pouvez chercher «
+         tarte aux pommes », « poisson », etc.`;
+ 
+         const recettesNumber = document.querySelector('.recettes-number');
+         recettesNumber.textContent = arr.length;
+ 
+     }else {
+         recettesCardsDiv.innerHTML = '';
+ 
+         const recettesNumber = document.querySelector('.recettes-number');
+         recettesNumber.textContent = arr.length;
+ 
+         const galery = new Galery(arr);
+         recettesCardsDiv.appendChild(galery.createGalery());
+     }
+}
+
 function display(arr){
     displayOptions(arr);
     displayGalery(arr);
 }
 
-display(recipes);
+/* Functions used by the main input for the text deletion 
+and delete-text-button appearance */
+function deleteTextButtonAppearance(element,searchInput){
+    if(searchInput.value.length > 2) {
+        element.style.visibility = "visible";
+        element.style.zIndex = "3";
+    }else {
+        element.style.visibility = "hidden";
+        element.style.zIndex = "1";
+    }
+}
 
+function deleteTextInput(input){
+    input.value= "";
+    input.setAttribute('placeholder','Rechercher une recette, un ingrédient, ...');
+    deleteTextButtonAppearance(deleteTextButton,input)
+    display(filterRecipes(recipes));
+}
+
+//Functions used by the main search algorithm
+function filterText(arr,text){
+    let arrFiltered = arr.filter((recipe)=>{
+            return recipe.name.toLowerCase().includes(text.toLowerCase()) 
+            || arrayToLowerCase(recipe.ingredients).includes(text.toLowerCase())
+            || recipe.description.toLowerCase().includes(text.toLowerCase())
+        });
+    return arrFiltered;
+}
+
+function inputTextTraitement(searchInput){
+    if(searchInput.value.length <= 2){
+        state.list = [...recipes]
+        display(filterRecipes(state.list));
+    }
+    
+    else if(searchInput.value.length > 2 && searchInput.className.includes("search-input")){
+        const arrSearchInputFiltered = filterText(recipes,searchInput.value);
+        state.list = [...arrSearchInputFiltered];
+        display(filterRecipes(arrSearchInputFiltered));
+    }
+    return state.list;
+}
+
+function arrayToLowerCase(arr){
+    const arrModified = arr.map(obj=> {
+        return obj.ingredient ? obj.ingredient.toLowerCase():
+        obj.toLowerCase()})
+    return arrModified;
+}
+
+//Functions used by the filters algorithm
 function filterRecipesByIngredients(arr){
     const ingredientsListFiltered = arr.filter(recipe => {
         const ingredientsVerification = !recipe.ingredients.some(ingredient => 
@@ -125,11 +185,9 @@ function filterRecipes(arr){
     if(searchInput.value.length <= 2){
         state.list = [...recipes];
     }
-    // Vérification rapide pour sortir tôt si tous les filtres sont actifs
    if (!ingredients.length && !appareils.length && !ustensils.length) {
        return arr;
    }else {
-    // Filtrage des recettes
         let arrFiltered = [...arr];
         if(filterRecipesByIngredients(arr).length){
             arrFiltered = filterRecipesByIngredients(arrFiltered);
@@ -144,59 +202,7 @@ function filterRecipes(arr){
    }
 }
 
-function filterText(arr,text){
-    let arrFiltered = arr.filter((recipe)=>{
-            return recipe.name.toLowerCase().includes(text.toLowerCase()) 
-            || arrayToLowerCase(recipe.ingredients).includes(text.toLowerCase())
-            || recipe.description.toLowerCase().includes(text.toLowerCase())
-        });
-    return arrFiltered;
-}
-
-function inputTextTraitement(searchInput){
-    if(searchInput.value.length <= 2){
-        state.list = [...recipes]
-        display(filterRecipes(state.list));
-    }
-    
-    else if(searchInput.value.length > 2 && searchInput.className.includes("search-input")){
-        const arrSearchInputFiltered = filterText(recipes,searchInput.value);
-        state.list = [...arrSearchInputFiltered];
-        display(filterRecipes(arrSearchInputFiltered));
-    }
-    return state.list;
-}
-
-function stringToUpperCase(string){
-    const ingredientLowerCase = string.toLowerCase()
-    const ingredientFirstLetterToUppercase = ingredientLowerCase[0].toUpperCase() + ingredientLowerCase.slice(1);
-    return ingredientFirstLetterToUppercase;
-}
-
-function arrayToLowerCase(arr){
-    const arrModified = arr.map(obj=> {
-        return obj.ingredient ? obj.ingredient.toLowerCase():
-        obj.toLowerCase()})
-    return arrModified;
-}
-
-function deleteTextButtonAppearance(element,searchInput){
-    if(searchInput.value.length > 2) {
-        element.style.visibility = "visible";
-        element.style.zIndex = "3";
-    }else {
-        element.style.visibility = "hidden";
-        element.style.zIndex = "1";
-    }
-}
-
-function deleteTextInput(input){
-    input.value= "";
-    input.setAttribute('placeholder','Rechercher une recette, un ingrédient, ...');
-    deleteTextButtonAppearance(deleteTextButton,input)
-    display(filterRecipes(recipes));
-}
-
+//Functions used for the creation,update and deletion of filters
 function recetteCardPosition(){
     recettesCardsDiv.style.top = 
     ` calc(116vh + ${Math.max(ingredients.length,appareils.length,ustensils.length)*73}px)
@@ -252,6 +258,7 @@ function updateOptionsInput(inputText,id){
     }else return;
 }
 
+//Filters input text treatment function
 function texteOptionsInputTraitement(element){
     if(element.classList.contains('options-delete-text-icon')){
         const input = element.closest('.options-search-bar').children[0];
@@ -269,17 +276,22 @@ function texteOptionsInputTraitement(element){
         updateOptionsInput(input.value,id);
         input.value = "";
     }
-    
 }
 
+//Event listeners
 document.addEventListener('DOMContentLoaded', function() {
-    const optionHeaderContainer = document.querySelectorAll('.option-header-container');
-    const cards = document.querySelectorAll('.card');
+    //Page initialisation
+    display(recipes);
 
+    //Needed for the animation of the cards
+    const cards = document.querySelectorAll('.card');
     cards.forEach((card, index) => {
         card.style.setProperty('--item-index', index);
     });
+
+    const optionHeaderContainer = document.querySelectorAll('.option-header-container');
     
+    //Event listeners for the main input elements
     searchInput.addEventListener('input',(e) => {
         e.preventDefault();
         inputTextTraitement(e.target);
@@ -298,6 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteTextInput(searchInput);
     });
 
+    //Event listeners for the filters elements
     optionHeaderContainer.forEach(option=>{
         option.addEventListener("mouseout", e=>{
             e.preventDefault();
