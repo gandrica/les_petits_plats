@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //Event listeners for the filters elements
     const optionHeaderContainer = document.querySelectorAll('.option-header-container');
     optionHeaderContainer.forEach(option=>{
-        option.addEventListener("mouseout", e=>{
+        option.addEventListener("mouseleave", e=>{
             e.preventDefault();
             e.target.closest(".option-header-container").style.cssText = "overflow:hidden; height:56px";
         })
