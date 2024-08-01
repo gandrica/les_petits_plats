@@ -77,6 +77,24 @@ function displayOptions(arr){
 }
 
 //Functions to display components of the page
+function cardAnimation(){
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+        card.style.setProperty('--item-index', index);
+        card.addEventListener('click', function () {
+            // Add the animate class to trigger the animation
+            card.classList.add('clicked');
+        
+            // Remove the animate class after the animation is complete
+            card.addEventListener('animationend', function (event) {
+                if (event.animationName === 'card-animation') {
+                  card.classList.remove('clicked');
+                }
+              }, { once: true });
+          });
+    });
+}
+
 function displayGalery(arr){
     if(!arr.length){
         //The textContent property sanitize against HTML injections
@@ -94,6 +112,7 @@ function displayGalery(arr){
  
          const galery = new Galery(arr);
          recettesCardsDiv.appendChild(galery.createGalery());
+         cardAnimation();
      }
 }
 
@@ -123,6 +142,16 @@ function deleteTextInput(input){
 
 //Functions used by the main search algorithm
 function filterText(arr,text){
+    /* const arrFiltered = [];
+
+    for(let i = 0; i<arr.length;i++){
+        if(arr[i].name.toLowerCase().includes(text.toLowerCase()) 
+            || arrayToLowerCase(arr[i].ingredients).includes(text.toLowerCase())
+            || arr[i].description.toLowerCase().includes(text.toLowerCase())){
+                arrFiltered.push(arr[i]);
+            }
+    } */
+
     let arrFiltered = arr.filter((recipe)=>{
             return recipe.name.toLowerCase().includes(text.toLowerCase()) 
             || arrayToLowerCase(recipe.ingredients).includes(text.toLowerCase())
@@ -283,14 +312,6 @@ document.addEventListener('DOMContentLoaded', function() {
     //Page initialisation
     display(recipes);
 
-    //Needed for the animation of the cards
-    const cards = document.querySelectorAll('.card');
-    cards.forEach((card, index) => {
-        card.style.setProperty('--item-index', index);
-    });
-
-    const optionHeaderContainer = document.querySelectorAll('.option-header-container');
-    
     //Event listeners for the main input elements
     searchInput.addEventListener('input',(e) => {
         e.preventDefault();
@@ -311,6 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     //Event listeners for the filters elements
+    const optionHeaderContainer = document.querySelectorAll('.option-header-container');
     optionHeaderContainer.forEach(option=>{
         option.addEventListener("mouseout", e=>{
             e.preventDefault();
@@ -343,5 +365,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     })
 });
-
-
