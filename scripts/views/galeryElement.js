@@ -17,7 +17,6 @@ export class Galery{
         this._list.forEach(recipe=>{
             const card = new CardModel(recipe);
             const cardElement = new CardElement(card)
-            console.log(cardElement);
             this.$wrapper.appendChild(cardElement.createCard())
         })
         return this.$wrapper;
