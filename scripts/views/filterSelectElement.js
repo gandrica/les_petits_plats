@@ -9,8 +9,8 @@ export class Options{
         this.$wrapper = document.createElement("div");
         this.$wrapper.setAttribute("class", "searching-options .manrope-option rounded-3");
         this.$wrapper.setAttribute("aria-label", this._name);
+        this.$wrapper.setAttribute("role", "search");
         this.$wrapper.setAttribute("aria-expanded", "true");
-        this.$wrapper.setAttribute("name", this._name);
         this.$wrapper.setAttribute("id", this._name);
         this.$wrapper.style.zIndex = "6";
     }
@@ -24,7 +24,6 @@ export class Options{
 
         const optionsName = document.createElement('p');
         optionsName.setAttribute('class', 'option option-name d-flex justify-content-between text-center');
-        optionsName.setAttribute('selected', 'selected');
         optionsName.textContent = 
         this._name === "ingredients"
         ? "Ingrédients": this._name === "appareils" 
