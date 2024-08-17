@@ -1,5 +1,5 @@
-import { SearchForm } from "./searchForm.js";
-import { IngredientList } from "./ingredientList.js";
+import { SearchForm } from "./searchFormElement.js";
+import { IngredientList } from "./ingredientListElement.js";
 
 export class Options{
     constructor(options,name){
