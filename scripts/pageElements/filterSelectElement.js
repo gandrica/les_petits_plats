@@ -1,3 +1,6 @@
+//Classe utilisée pour la création d'un container qui englobe les listes d'options, 
+//le nom de l'option et le formulaire de recherche
+
 import { SearchForm } from "./searchFormElement.js";
 import { IngredientList } from "./ingredientListElement.js";
 
@@ -15,6 +18,7 @@ export class Options{
         this.$wrapper.style.zIndex = "6";
     }
 
+    //Crée l'élement DOM du container
     createOptions(options=this._options){
         const optionHeaderContainer = document.createElement('div');
         optionHeaderContainer.setAttribute('class', 'option-header-container');

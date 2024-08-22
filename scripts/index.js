@@ -1,14 +1,14 @@
-//Import data
-import {recipes} from '../data/recipes.js';
+//Import des données
+import {recipes} from './data/recipes.js';
 
-//Import views
+//Import des élements de page
 import { SearchForm } from './pageElements/searchFormElement.js';
 import { Options } from './pageElements/filterSelectElement.js';
 import { IngredientList } from './pageElements/ingredientListElement.js';
 import { Galery } from './pageElements/galeryElement.js';
 
-//Import controllers
-import { searchText } from './functions/searchFunctions.js';
+//Import des functions utilisées par les élements de page
+import { searchText } from './utils/searchFunctions.js';
 import { 
     filterAppareils, 
     filterIngredients, 
@@ -19,13 +19,11 @@ import {
     updateOptionsInput,
     createFilter,
     deleteFilter } 
-    from './functions/filterFunctions.js';
+    from './utils/filterFunctions.js';
+import { cardAnimation,recetteCardPosition } from './utils/cardFunctions.js';
+import { deleteTextButtonAppearance } from './utils/buttonsFunctions.js';
 
-//Import utils
-import { cardAnimation,recetteCardPosition } from './functions/cardFunctions.js';
-import { deleteTextButtonAppearance } from './functions/buttonsFunctions.js';
-
-//Variables
+//Variables utilisées par les functions et les events listeners
 const searchContainer = document.querySelector('#title');
 const searchFormTitle = new SearchForm('title');
 searchContainer.appendChild(searchFormTitle.createSearchForm());
@@ -37,6 +35,7 @@ const searchInput = document.querySelector('.search-input');
 const recettesForm = document.querySelector('.recettes-form');
 const recettesCardsDiv = document.querySelector('.recettes-cards');
 
+//Variables utilisés par les functions et events listeners travaillant avec les filtres
 export const state = {
     list: [...recipes],
     filters:{ingredients: [],ustensils:[], appareils:[] }
@@ -44,8 +43,8 @@ export const state = {
 const {filters} = state;
 const {ingredients,appareils,ustensils} = filters;
 
-//Functions used to create the options
-
+//Prend comme argument une liste de recettes et une option, et met à jour l'élement du DOM avec l'ID correspondant s'il existe,
+// sinon va créer un nouveau élement avec la nouvelle liste de recettes
 function createOption(arr,option){
     const listToUpdate = document.querySelector(`#${option}-list`);
     if(listToUpdate){
@@ -57,12 +56,15 @@ function createOption(arr,option){
     }
 }
 
+
+//Crée ou met à jour les listes des ingrédients, ustensiles ou appareils avec la liste de recettes en arguments
 function displayOptions(arr){
     createOption(new Set(filterIngredients(arr)), 'ingredients');
     createOption(new Set(filterUstensils(arr)), 'ustensils');
     createOption(new Set(filterAppareils(arr)), 'appareils');
 }
 
+//Met à jour la galerie avec la liste de recettes en arguments
 function displayGalery(arr){
     if(!arr.length){
         //The textContent property sanitize against HTML injections
@@ -84,11 +86,13 @@ function displayGalery(arr){
      }
 }
 
+//Met a jour les listes et la galerie
 function display(arr){
     displayOptions(arr);
     displayGalery(arr);
 }
 
+//Utilisée pour filtrer les ingredients,appareils et ustensils à l'aide de la variable state et les functions importées de "./utils/filterFunctions.js"
 function filterRecipes(arr){
     if(searchInput.value.length <= 2){
         state.list = [...recipes];
@@ -110,6 +114,7 @@ function filterRecipes(arr){
    }
 }
 
+//Supprime le texte de l'input passé en arguments, rend l'icon "x" invisible et met à jour la galerie et les listes d'options
 function deleteTextInput(input){
     input.value= "";
     input.setAttribute('placeholder','Rechercher une recette, un ingrédient, ...');
@@ -117,6 +122,7 @@ function deleteTextInput(input){
     display(filterRecipes(recipes));
 }
 
+//Traite le texte de l'input passé en argument et met à jour la galerie et les options
 function inputTextTraitement(searchInput){
     if(searchInput.value.length <= 2){
         state.list = [...recipes]
@@ -131,7 +137,7 @@ function inputTextTraitement(searchInput){
     return state.list;
 }
 
-//Filters input text treatment function
+//Traite le texte de l'input situé dans les options
 function texteOptionsInputTraitement(element){
     if(element.classList.contains('options-delete-text-icon')){
         const input = element.closest('.options-search-bar').children[0];
@@ -151,6 +157,7 @@ function texteOptionsInputTraitement(element){
     }
 }
 
+//Ajuste la position des filtres et met à jour la galerie et les options
 function refreshFilters(){
     recetteCardPosition(recettesCardsDiv);
     display(filterRecipes(state.list));
@@ -161,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //Page initialisation
     display(recipes);
 
-    //Event listeners for the main input elements
+    //Event listeners pour les élements de la recherche principale
     searchInput.addEventListener('input',(e) => {
         e.preventDefault();
         inputTextTraitement(e.target);
@@ -180,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteTextInput(searchInput);
     });
 
-    //Event listeners for the filters elements
+    //Event listeners differents de "click" pour les élements utilisés par la recherche secondaire
     const optionHeaderContainer = document.querySelectorAll('.option-header-container');
     optionHeaderContainer.forEach(option=>{
         option.addEventListener("mouseleave", e=>{
@@ -198,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     })
     
+    //Event delegation avec "click" pour les élements utilisés par la recherche secondaire
     recettesForm.addEventListener('click', (e)=>{
         e.preventDefault();
         if(e.target.classList.contains("bi-x-lg") || e.target.classList.contains("filter-delete-button")) {

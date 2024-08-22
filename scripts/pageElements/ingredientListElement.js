@@ -1,3 +1,5 @@
+//Classe utilisée pour la création d'une liste d'options
+
 export class IngredientList{
     constructor(list,id){
         this._list = list;
@@ -7,6 +9,7 @@ export class IngredientList{
         this.$wrapper.setAttribute("id",`${this._id}-list`);
     }
 
+    //Crée l'élement DOM d'une liste d'options
     createIngredientList(){
         this._list.forEach(el => {
             const li = document.createElement('li');

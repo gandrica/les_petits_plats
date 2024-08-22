@@ -398,6 +398,7 @@ header{
     }
 }
 
+/* When the card is clicked */
 @keyframes card-animation {
     0% {
       transform: scale(1);

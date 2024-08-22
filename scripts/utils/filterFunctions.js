@@ -1,7 +1,11 @@
+//Functions utilisés par la recherche secondaire(les filtres)
+
 import { stringToUpperCase } from './stringFunctions.js';
 import { state } from '../index.js';
 import { FilterOption } from '../pageElements/filterOptionElement.js';
 
+//Prend comme argument une liste de recettes et retourne une liste d'ingredients
+//Utilisée pour la création d'une liste d'ingrédients dans '../index.js'
 export function filterIngredients(arr){
     const ingredientsArr = arr.map(
         recipe => recipe.ingredients.map(
@@ -12,6 +16,8 @@ export function filterIngredients(arr){
     return ingredientsArr;
 }
 
+//Prend comme argument une liste de recettes et retourne une liste d'ustensiles
+//Utilisée pour la création d'une liste d'ustensiles dans '../index.js'
 export function filterUstensils(arr){
     const ustensilsArr = arr
         .map(recipe=> recipe.ustensils)
@@ -21,6 +27,8 @@ export function filterUstensils(arr){
    return ustensilsArr;
 }
 
+//Prend comme argument une liste de recettes et retourne une liste d'appareils
+//Utilisée pour la création d'une liste d'appareils dans '../index.js'
 export function filterAppareils(arr){
     const appareilsArr =  arr
         .map(recipe=> recipe.appliance)
@@ -29,6 +37,8 @@ export function filterAppareils(arr){
     return appareilsArr;
 }
 
+//Prend comme argument une liste de recettes et retourne une liste qui contient dans leur ingrédients les mots contenu par state.filters.ingredients en '../index.js'
+//Utilisée pour filtrer les recettes avec "filterRecipes()" dans '../index.js'
 export function filterRecipesByIngredients(arr){
     const ingredientsListFiltered = arr.filter(recipe => {
         const ingredientsVerification = !recipe.ingredients.some(ingredient => 
@@ -39,6 +49,8 @@ export function filterRecipesByIngredients(arr){
     return ingredientsListFiltered
 }
 
+//Prend comme argument une liste de recettes et retourne une liste qui contient dans leur appareils les mots contenu par state.filters.appareils en '../index.js'
+//Utilisée pour filtrer les recettes avec "filterRecipes()" dans '../index.js'
 export function filterRecipesByAppareils(arr){
     const appareilsListFiltered = arr.filter(recipe => {
         const appareilsVerification = !state.filters.appareils.includes(stringToUpperCase(recipe.appliance));
@@ -48,6 +60,8 @@ export function filterRecipesByAppareils(arr){
     return appareilsListFiltered;
 }
 
+//Prend comme argument une liste de recettes et retourne une liste qui contient dans leur ustensiles les mots contenu par state.filters.ustensils en '../index.js'
+//Utilisée pour filtrer les recettes avec "filterRecipes()" dans '../index.js'
 export function filterRecipesByUstensils(arr){
     const ustensilsListFiltered = arr.filter(recipe => {
         const ustensilsVerification = !recipe.ustensils.some(ustensil => state.filters.ustensils.includes(stringToUpperCase(ustensil)));
@@ -57,10 +71,12 @@ export function filterRecipesByUstensils(arr){
     return ustensilsListFiltered;
 }
 
+//Filtre la liste et retourne une nouvelle liste avec les options qui contiennent le texte
 function filterOptionArray(arr,inputText){
     return arr.filter(option => option.toLowerCase().includes(inputText.toLowerCase()));
 }
 
+//Retourne une nouvelle liste d'options en fonction d'id
 function filterInputOptionsList(arr,inputText,id){
     const listOptionsFiltered = id === 'ingredients'
     ? filterOptionArray([...new Set(filterIngredients(arr))],inputText) : id === 'ustensils'
@@ -69,6 +85,8 @@ function filterInputOptionsList(arr,inputText,id){
     return listOptionsFiltered;
 }
 
+//Met à jour le DOM avec les listes d'options en fonction d'id passé en argument
+//Utilisée par la fonction "updateOptionsInput()" en "../index.js"
 export function updateOptionsInput(inputText,id){
     const listOptions = filterInputOptionsList(state.list,inputText,id);
     const deleteInputTextIcon = document.querySelector(`#${id} .options-delete-text-icon`);
@@ -84,6 +102,7 @@ export function updateOptionsInput(inputText,id){
     }else return;
 }
 
+//Création d'un filtre
 export function createFilter(element){
     const item = element.textContent;
     const searchingOptionsId = element.closest('.searching-options').id;
@@ -95,6 +114,7 @@ export function createFilter(element){
     }
 }
 
+//Suppression d'un filtre
 export function deleteFilter(element){
     const elementId= element.closest('.searching-options').id
     const elementIndex = state.filters[elementId].indexOf(element.textContent);

@@ -1,3 +1,4 @@
+//Model de données utilisé par "cardElement.js" pour la création d'un element DOM d'une recette
 export class CardModel {
     constructor(card){
         this._id = card.id;

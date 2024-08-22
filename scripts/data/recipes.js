@@ -1,3 +1,4 @@
+//La liste initiale avec les 50 recettes
 export const recipes = [
     {
         "id": 1,

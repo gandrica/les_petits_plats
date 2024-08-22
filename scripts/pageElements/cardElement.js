@@ -1,3 +1,4 @@
+//Classe utilsée pour la création d'une recette
 export class CardElement{
     constructor(card){
         this._card = card;
@@ -6,6 +7,7 @@ export class CardElement{
         this.$wrapper.setAttribute("class", "card");
     }
 
+    //Corrige les coquilles dans les unités de la liste initiale
     fixUnits(ing){
         let unitModified = ing.unit ?? "";
         if(ing.ingredient && !ing.quantity) {unitModified = "-"; return unitModified}
@@ -17,6 +19,7 @@ export class CardElement{
         return unitModified;
     }
 
+    //Crée l'element DOM pour la liste d'ingredients
     createIngredients(ul){
         this._card.ingredients.forEach(ing=>{
             const li = document.createElement('li');
@@ -29,6 +32,7 @@ export class CardElement{
         });
     }
 
+    //Crée l'element DOM de la recette
     createCard(){
         const time = document.createElement('span');
         time.setAttribute('class','card-time text-center pt-1');

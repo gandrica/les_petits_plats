@@ -1,3 +1,5 @@
+//Classe utilisée pour la création d'un formulaire de recherche
+
 export class SearchForm{
     constructor(formId){
         this._formId = formId;
@@ -5,6 +7,7 @@ export class SearchForm{
         this.$wrapper = document.createElement("form");
     }
 
+    //Crée l'élement du DOM avec le formulaire de recherche
     createSearchForm(){
         if(this._formId === "title") {
             this.$wrapper.setAttribute("class", "search-bar-title search-bar container-fluid d-flex justify-content-center w-100");

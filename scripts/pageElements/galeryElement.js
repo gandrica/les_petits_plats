@@ -1,3 +1,5 @@
+//Classe utilisée pour la création d'une galerie de recettes
+
 import { CardModel } from "../models/cardModel.js";
 import { CardElement } from "./cardElement.js";
 
@@ -10,6 +12,7 @@ export class Galery{
         this.$wrapper.setAttribute('id','recettes-cards-container');
     }
 
+    //Crée l'élement DOM avec les recettes
     createGalery(){
 
         this.$wrapper.innerHTML = '';

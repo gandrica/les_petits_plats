@@ -1,3 +1,4 @@
+//Classe utilisée pour la création de filtres placés sous les listes d'options
 export class FilterOption{
     constructor(name,item){
         this._name = name;
@@ -5,6 +6,7 @@ export class FilterOption{
 
     }
 
+    //Crée l'élement DOM du filtre
     createFilterItem(){
         const filters = document.querySelector(`#${this._name}>.filters`);
         const li = document.createElement('li');

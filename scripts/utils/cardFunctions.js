@@ -1,3 +1,6 @@
+//Functions qui touchent ou animent les cards
+
+//Crée l'animation des cards dans la galerie
 export function cardAnimation(){
     const cards = document.querySelectorAll('.card');
     cards.forEach((card, index) => {
@@ -16,6 +19,7 @@ export function cardAnimation(){
     });
 }
 
+//Utilisée pour déplacer la galerie en fonction du nombre de filtres sélectionés
 export function recetteCardPosition(div){
     div.style.top = 
     ` calc(116vh + ${Math.max(ingredients.length,appareils.length,ustensils.length)*73}px)

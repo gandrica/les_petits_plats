@@ -20,7 +20,10 @@
     <link rel="shortcut icon" href="#">
 </head>
 <body class="overflow-x-hidden">
+    <!-- Header -->
     <header class="header p-5">
+
+        <!-- Logo -->
         <div class="logo">
             <h2 class="fs-4 text-light fw-normal anton-h2">LES PETITS PLATS
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-record2" viewBox="0 0 16 16">
@@ -30,19 +33,27 @@
             </h2>
         </div>
     </header>
-        
+    
     <main class="main">
+
+        <!-- Container du titre principal -->
         <div id="title" class="search-container container-fluid d-flex flex-column align-items-center justify-content-center">
             <h1 class="search-title w-100 d-flex anton-h1 justify-content-center fw-bold fs-1">CHERCHEZ PARMI PLUS DE 1500 RECETTES <br>DU QUOTIDIEN,SIMPLES ET D&#201;LICIEUSES</h1>
         </div>
+
+        <!-- Container des filtres et du nombre de recettes -->
         <div class="recettes container d-flex space-between">
             <div class="recettes-form container d-flex"></div>
             <div class="recettes-number-container d-flex align-items-center justify-content-end">
                 <h3 class="anton-h3 fs-5"><span class="recettes-number">1500</span> recettes</h3>
             </div>
         </div>
+
+        <!-- Container de la galerie de recettes -->
         <div class="recettes-cards d-flex"></div>    
     </main>
+
+    <!-- Importation des fichiers contenant du script Javascript -->
     <script src="./scripts/index.js" type="module"></script>
 </body>
 </html>
