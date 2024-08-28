@@ -1,7 +1,9 @@
 //Functions utilisés par la recherche secondaire(les filtres)
 
 import { stringToUpperCase } from './stringFunctions.js';
-import { state } from '../index.js';
+import { deleteTextButtonAppearance } from './buttonsFunctions.js';
+import { state} from '../index.js';
+import { createOption } from './optionsFunctions.js';
 import { FilterOption } from '../pageElements/filterOptionElement.js';
 
 //Prend comme argument une liste de recettes et retourne une liste d'ingredients

@@ -1,4 +1,5 @@
 //Functions qui touchent ou animent les cards
+import {ingredients,appareils,ustensils} from '../index.js';
 
 //Crée l'animation des cards dans la galerie
 export function cardAnimation(){

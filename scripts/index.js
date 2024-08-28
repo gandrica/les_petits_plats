@@ -3,8 +3,6 @@ import {recipes} from './data/recipes.js';
 
 //Import des élements de page
 import { SearchForm } from './pageElements/searchFormElement.js';
-import { Options } from './pageElements/filterSelectElement.js';
-import { IngredientList } from './pageElements/ingredientListElement.js';
 import { Galery } from './pageElements/galeryElement.js';
 
 //Import des functions utilisées par les élements de page
@@ -22,6 +20,7 @@ import {
     from './utils/filterFunctions.js';
 import { cardAnimation,recetteCardPosition } from './utils/cardFunctions.js';
 import { deleteTextButtonAppearance } from './utils/buttonsFunctions.js';
+import { createOption } from './utils/optionsFunctions.js';
 
 //Variables utilisées par les functions et les events listeners
 const searchContainer = document.querySelector('#title');
@@ -41,27 +40,14 @@ export const state = {
     filters:{ingredients: [],ustensils:[], appareils:[] }
 };
 const {filters} = state;
-const {ingredients,appareils,ustensils} = filters;
-
-//Prend comme argument une liste de recettes et une option, et met à jour l'élement du DOM avec l'ID correspondant s'il existe,
-// sinon va créer un nouveau élement avec la nouvelle liste de recettes
-function createOption(arr,option){
-    const listToUpdate = document.querySelector(`#${option}-list`);
-    if(listToUpdate){
-        const newList = new IngredientList(arr,option);
-        listToUpdate.parentNode.replaceChild(newList.createIngredientList(),listToUpdate);
-    }else{
-        const selectOption = new Options(arr, option);
-        recettesForm.appendChild(selectOption.createOptions());
-    }
-}
+export const {ingredients,appareils,ustensils} = filters;
 
 
 //Crée ou met à jour les listes des ingrédients, ustensiles ou appareils avec la liste de recettes en arguments
 function displayOptions(arr){
-    createOption(new Set(filterIngredients(arr)), 'ingredients');
-    createOption(new Set(filterUstensils(arr)), 'ustensils');
-    createOption(new Set(filterAppareils(arr)), 'appareils');
+    createOption(new Set(filterIngredients(arr)), 'ingredients',recettesForm);
+    createOption(new Set(filterUstensils(arr)), 'ustensils',recettesForm);
+    createOption(new Set(filterAppareils(arr)), 'appareils',recettesForm);
 }
 
 //Met à jour la galerie avec la liste de recettes en arguments

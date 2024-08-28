@@ -19,7 +19,7 @@ export class Options{
     }
 
     //Crée l'élement DOM du container
-    createOptions(options=this._options){
+    createOptions(){
         const optionHeaderContainer = document.createElement('div');
         optionHeaderContainer.setAttribute('class', 'option-header-container');
 
